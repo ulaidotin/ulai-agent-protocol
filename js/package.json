@@ -1,0 +1,20 @@
+{
+  "name": "ulai-agent-protocol",
+  "version": "0.1.0",
+  "description": "Generated protobuf code for the Ulai agent API (ulai.agent.v1)",
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    "./ulai/agent/v1": {
+      "types": "./ulai/agent/v1/agent_pb.d.ts",
+      "default": "./ulai/agent/v1/agent_pb.js"
+    }
+  },
+  "files": [
+    "ulai/**/*.js",
+    "ulai/**/*.d.ts"
+  ],
+  "dependencies": {
+    "@bufbuild/protobuf": "^2.16.0"
+  }
+}
