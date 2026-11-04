@@ -2,6 +2,16 @@
   "name": "ulai-agent-protocol",
   "version": "0.1.0",
   "description": "Generated protobuf code for the Ulai agent API (ulai.agent.v1)",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ulaidotin/ulai-agent-protocol.git",
+    "directory": "js"
+  },
+  "homepage": "https://github.com/ulaidotin/ulai-agent-protocol/tree/main/js",
+  "bugs": {
+    "url": "https://github.com/ulaidotin/ulai-agent-protocol/issues"
+  },
   "type": "module",
   "sideEffects": false,
   "exports": {
