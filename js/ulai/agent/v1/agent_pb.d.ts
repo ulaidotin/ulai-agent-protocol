@@ -53,6 +53,11 @@ export declare type JoinRoomRequest = Message<"ulai.agent.v1.JoinRoomRequest"> &
    * @generated from field: ulai.agent.v1.AgentProfile profile = 7;
    */
   profile?: AgentProfile | undefined;
+
+  /**
+   * @generated from field: ulai.agent.v1.MediaTransport transport = 10;
+   */
+  transport: MediaTransport;
 };
 
 /**
@@ -1672,6 +1677,31 @@ export enum Pipeline {
  * Describes the enum ulai.agent.v1.Pipeline.
  */
 export declare const PipelineSchema: GenEnum<Pipeline>;
+
+/**
+ * @generated from enum ulai.agent.v1.MediaTransport
+ */
+export enum MediaTransport {
+  /**
+   * @generated from enum value: MEDIA_TRANSPORT_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * @generated from enum value: MEDIA_TRANSPORT_WEBSOCKET = 1;
+   */
+  WEBSOCKET = 1,
+
+  /**
+   * @generated from enum value: MEDIA_TRANSPORT_WEBRTC = 2;
+   */
+  WEBRTC = 2,
+}
+
+/**
+ * Describes the enum ulai.agent.v1.MediaTransport.
+ */
+export declare const MediaTransportSchema: GenEnum<MediaTransport>;
 
 /**
  * @generated from enum ulai.agent.v1.OpeningTurn

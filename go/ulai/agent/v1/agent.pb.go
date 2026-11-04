@@ -174,6 +174,55 @@ func (Pipeline) EnumDescriptor() ([]byte, []int) {
 	return file_ulai_agent_v1_agent_proto_rawDescGZIP(), []int{2}
 }
 
+type MediaTransport int32
+
+const (
+	MediaTransport_MEDIA_TRANSPORT_UNSPECIFIED MediaTransport = 0
+	MediaTransport_MEDIA_TRANSPORT_WEBSOCKET   MediaTransport = 1
+	MediaTransport_MEDIA_TRANSPORT_WEBRTC      MediaTransport = 2
+)
+
+// Enum value maps for MediaTransport.
+var (
+	MediaTransport_name = map[int32]string{
+		0: "MEDIA_TRANSPORT_UNSPECIFIED",
+		1: "MEDIA_TRANSPORT_WEBSOCKET",
+		2: "MEDIA_TRANSPORT_WEBRTC",
+	}
+	MediaTransport_value = map[string]int32{
+		"MEDIA_TRANSPORT_UNSPECIFIED": 0,
+		"MEDIA_TRANSPORT_WEBSOCKET":   1,
+		"MEDIA_TRANSPORT_WEBRTC":      2,
+	}
+)
+
+func (x MediaTransport) Enum() *MediaTransport {
+	p := new(MediaTransport)
+	*p = x
+	return p
+}
+
+func (x MediaTransport) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (MediaTransport) Descriptor() protoreflect.EnumDescriptor {
+	return file_ulai_agent_v1_agent_proto_enumTypes[3].Descriptor()
+}
+
+func (MediaTransport) Type() protoreflect.EnumType {
+	return &file_ulai_agent_v1_agent_proto_enumTypes[3]
+}
+
+func (x MediaTransport) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use MediaTransport.Descriptor instead.
+func (MediaTransport) EnumDescriptor() ([]byte, []int) {
+	return file_ulai_agent_v1_agent_proto_rawDescGZIP(), []int{3}
+}
+
 type OpeningTurn int32
 
 const (
@@ -207,11 +256,11 @@ func (x OpeningTurn) String() string {
 }
 
 func (OpeningTurn) Descriptor() protoreflect.EnumDescriptor {
-	return file_ulai_agent_v1_agent_proto_enumTypes[3].Descriptor()
+	return file_ulai_agent_v1_agent_proto_enumTypes[4].Descriptor()
 }
 
 func (OpeningTurn) Type() protoreflect.EnumType {
-	return &file_ulai_agent_v1_agent_proto_enumTypes[3]
+	return &file_ulai_agent_v1_agent_proto_enumTypes[4]
 }
 
 func (x OpeningTurn) Number() protoreflect.EnumNumber {
@@ -220,7 +269,7 @@ func (x OpeningTurn) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use OpeningTurn.Descriptor instead.
 func (OpeningTurn) EnumDescriptor() ([]byte, []int) {
-	return file_ulai_agent_v1_agent_proto_rawDescGZIP(), []int{3}
+	return file_ulai_agent_v1_agent_proto_rawDescGZIP(), []int{4}
 }
 
 type TurnDetection int32
@@ -256,11 +305,11 @@ func (x TurnDetection) String() string {
 }
 
 func (TurnDetection) Descriptor() protoreflect.EnumDescriptor {
-	return file_ulai_agent_v1_agent_proto_enumTypes[4].Descriptor()
+	return file_ulai_agent_v1_agent_proto_enumTypes[5].Descriptor()
 }
 
 func (TurnDetection) Type() protoreflect.EnumType {
-	return &file_ulai_agent_v1_agent_proto_enumTypes[4]
+	return &file_ulai_agent_v1_agent_proto_enumTypes[5]
 }
 
 func (x TurnDetection) Number() protoreflect.EnumNumber {
@@ -269,7 +318,7 @@ func (x TurnDetection) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use TurnDetection.Descriptor instead.
 func (TurnDetection) EnumDescriptor() ([]byte, []int) {
-	return file_ulai_agent_v1_agent_proto_rawDescGZIP(), []int{4}
+	return file_ulai_agent_v1_agent_proto_rawDescGZIP(), []int{5}
 }
 
 type JoinRoomRequest struct {
@@ -282,6 +331,7 @@ type JoinRoomRequest struct {
 	RoomUrl          string                 `protobuf:"bytes,8,opt,name=room_url,json=roomUrl,proto3" json:"room_url,omitempty"`
 	RoomToken        string                 `protobuf:"bytes,9,opt,name=room_token,json=roomToken,proto3" json:"room_token,omitempty"`
 	Profile          *AgentProfile          `protobuf:"bytes,7,opt,name=profile,proto3" json:"profile,omitempty"`
+	Transport        MediaTransport         `protobuf:"varint,10,opt,name=transport,proto3,enum=ulai.agent.v1.MediaTransport" json:"transport,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -370,6 +420,13 @@ func (x *JoinRoomRequest) GetProfile() *AgentProfile {
 		return x.Profile
 	}
 	return nil
+}
+
+func (x *JoinRoomRequest) GetTransport() MediaTransport {
+	if x != nil {
+		return x.Transport
+	}
+	return MediaTransport_MEDIA_TRANSPORT_UNSPECIFIED
 }
 
 type JoinRoomResponse struct {
@@ -3644,7 +3701,7 @@ var File_ulai_agent_v1_agent_proto protoreflect.FileDescriptor
 
 const file_ulai_agent_v1_agent_proto_rawDesc = "" +
 	"\n" +
-	"\x19ulai/agent/v1/agent.proto\x12\rulai.agent.v1\"\xc7\x02\n" +
+	"\x19ulai/agent/v1/agent.proto\x12\rulai.agent.v1\"\x84\x03\n" +
 	"\x0fJoinRoomRequest\x12\x19\n" +
 	"\bagent_id\x18\x01 \x01(\tR\aagentId\x12\x17\n" +
 	"\aroom_id\x18\x02 \x01(\tR\x06roomId\x12%\n" +
@@ -3654,7 +3711,9 @@ const file_ulai_agent_v1_agent_proto_rawDesc = "" +
 	"\broom_url\x18\b \x01(\tR\aroomUrl\x12\x1d\n" +
 	"\n" +
 	"room_token\x18\t \x01(\tR\troomToken\x125\n" +
-	"\aprofile\x18\a \x01(\v2\x1b.ulai.agent.v1.AgentProfileR\aprofileJ\x04\b\x04\x10\x05\"\xbb\x01\n" +
+	"\aprofile\x18\a \x01(\v2\x1b.ulai.agent.v1.AgentProfileR\aprofile\x12;\n" +
+	"\ttransport\x18\n" +
+	" \x01(\x0e2\x1d.ulai.agent.v1.MediaTransportR\ttransportJ\x04\b\x04\x10\x05\"\xbb\x01\n" +
 	"\x10JoinRoomResponse\x12\x17\n" +
 	"\aroom_id\x18\x01 \x01(\tR\x06roomId\x12\x19\n" +
 	"\bagent_id\x18\x03 \x01(\tR\aagentId\x12%\n" +
@@ -3999,7 +4058,11 @@ const file_ulai_agent_v1_agent_proto_rawDesc = "" +
 	"\x14PIPELINE_UNSPECIFIED\x10\x00\x12\x15\n" +
 	"\x11PIPELINE_REALTIME\x10\x01\x12\x19\n" +
 	"\x15PIPELINE_SEMI_CASCADE\x10\x02\x12\x14\n" +
-	"\x10PIPELINE_CASCADE\x10\x03*\\\n" +
+	"\x10PIPELINE_CASCADE\x10\x03*l\n" +
+	"\x0eMediaTransport\x12\x1f\n" +
+	"\x1bMEDIA_TRANSPORT_UNSPECIFIED\x10\x00\x12\x1d\n" +
+	"\x19MEDIA_TRANSPORT_WEBSOCKET\x10\x01\x12\x1a\n" +
+	"\x16MEDIA_TRANSPORT_WEBRTC\x10\x02*\\\n" +
 	"\vOpeningTurn\x12\x1c\n" +
 	"\x18OPENING_TURN_UNSPECIFIED\x10\x00\x12\x16\n" +
 	"\x12OPENING_TURN_AGENT\x10\x01\x12\x17\n" +
@@ -4028,117 +4091,119 @@ func file_ulai_agent_v1_agent_proto_rawDescGZIP() []byte {
 	return file_ulai_agent_v1_agent_proto_rawDescData
 }
 
-var file_ulai_agent_v1_agent_proto_enumTypes = make([]protoimpl.EnumInfo, 5)
+var file_ulai_agent_v1_agent_proto_enumTypes = make([]protoimpl.EnumInfo, 6)
 var file_ulai_agent_v1_agent_proto_msgTypes = make([]protoimpl.MessageInfo, 40)
 var file_ulai_agent_v1_agent_proto_goTypes = []any{
 	(Speaker)(0),                // 0: ulai.agent.v1.Speaker
 	(AgentState)(0),             // 1: ulai.agent.v1.AgentState
 	(Pipeline)(0),               // 2: ulai.agent.v1.Pipeline
-	(OpeningTurn)(0),            // 3: ulai.agent.v1.OpeningTurn
-	(TurnDetection)(0),          // 4: ulai.agent.v1.TurnDetection
-	(*JoinRoomRequest)(nil),     // 5: ulai.agent.v1.JoinRoomRequest
-	(*JoinRoomResponse)(nil),    // 6: ulai.agent.v1.JoinRoomResponse
-	(*LeaveRequest)(nil),        // 7: ulai.agent.v1.LeaveRequest
-	(*LeaveResponse)(nil),       // 8: ulai.agent.v1.LeaveResponse
-	(*SubscribeRequest)(nil),    // 9: ulai.agent.v1.SubscribeRequest
-	(*Job)(nil),                 // 10: ulai.agent.v1.Job
-	(*ClientEvent)(nil),         // 11: ulai.agent.v1.ClientEvent
-	(*HandledTools)(nil),        // 12: ulai.agent.v1.HandledTools
-	(*Attach)(nil),              // 13: ulai.agent.v1.Attach
-	(*Say)(nil),                 // 14: ulai.agent.v1.Say
-	(*GenerateReply)(nil),       // 15: ulai.agent.v1.GenerateReply
-	(*InjectContext)(nil),       // 16: ulai.agent.v1.InjectContext
-	(*ToolResult)(nil),          // 17: ulai.agent.v1.ToolResult
-	(*Interrupt)(nil),           // 18: ulai.agent.v1.Interrupt
-	(*Hangup)(nil),              // 19: ulai.agent.v1.Hangup
-	(*ServerEvent)(nil),         // 20: ulai.agent.v1.ServerEvent
-	(*SessionStarted)(nil),      // 21: ulai.agent.v1.SessionStarted
-	(*Transcript)(nil),          // 22: ulai.agent.v1.Transcript
-	(*TurnStarted)(nil),         // 23: ulai.agent.v1.TurnStarted
-	(*TurnEnded)(nil),           // 24: ulai.agent.v1.TurnEnded
-	(*TurnTokens)(nil),          // 25: ulai.agent.v1.TurnTokens
-	(*AgentStateChanged)(nil),   // 26: ulai.agent.v1.AgentStateChanged
-	(*ToolCall)(nil),            // 27: ulai.agent.v1.ToolCall
-	(*ToolOutcome)(nil),         // 28: ulai.agent.v1.ToolOutcome
-	(*UsageReport)(nil),         // 29: ulai.agent.v1.UsageReport
-	(*ModelUsage)(nil),          // 30: ulai.agent.v1.ModelUsage
-	(*UsageIO)(nil),             // 31: ulai.agent.v1.UsageIO
-	(*ModalityTokens)(nil),      // 32: ulai.agent.v1.ModalityTokens
-	(*SessionEnded)(nil),        // 33: ulai.agent.v1.SessionEnded
-	(*PipelineMetrics)(nil),     // 34: ulai.agent.v1.PipelineMetrics
-	(*PipelineDrops)(nil),       // 35: ulai.agent.v1.PipelineDrops
-	(*SessionError)(nil),        // 36: ulai.agent.v1.SessionError
-	(*CallInfo)(nil),            // 37: ulai.agent.v1.CallInfo
-	(*BackendInfo)(nil),         // 38: ulai.agent.v1.BackendInfo
-	(*AgentProfile)(nil),        // 39: ulai.agent.v1.AgentProfile
-	(*SpeechServiceConfig)(nil), // 40: ulai.agent.v1.SpeechServiceConfig
-	(*CascadeConfig)(nil),       // 41: ulai.agent.v1.CascadeConfig
-	(*ToolSpec)(nil),            // 42: ulai.agent.v1.ToolSpec
-	(*ToolParam)(nil),           // 43: ulai.agent.v1.ToolParam
-	nil,                         // 44: ulai.agent.v1.ToolSpec.ParametersEntry
+	(MediaTransport)(0),         // 3: ulai.agent.v1.MediaTransport
+	(OpeningTurn)(0),            // 4: ulai.agent.v1.OpeningTurn
+	(TurnDetection)(0),          // 5: ulai.agent.v1.TurnDetection
+	(*JoinRoomRequest)(nil),     // 6: ulai.agent.v1.JoinRoomRequest
+	(*JoinRoomResponse)(nil),    // 7: ulai.agent.v1.JoinRoomResponse
+	(*LeaveRequest)(nil),        // 8: ulai.agent.v1.LeaveRequest
+	(*LeaveResponse)(nil),       // 9: ulai.agent.v1.LeaveResponse
+	(*SubscribeRequest)(nil),    // 10: ulai.agent.v1.SubscribeRequest
+	(*Job)(nil),                 // 11: ulai.agent.v1.Job
+	(*ClientEvent)(nil),         // 12: ulai.agent.v1.ClientEvent
+	(*HandledTools)(nil),        // 13: ulai.agent.v1.HandledTools
+	(*Attach)(nil),              // 14: ulai.agent.v1.Attach
+	(*Say)(nil),                 // 15: ulai.agent.v1.Say
+	(*GenerateReply)(nil),       // 16: ulai.agent.v1.GenerateReply
+	(*InjectContext)(nil),       // 17: ulai.agent.v1.InjectContext
+	(*ToolResult)(nil),          // 18: ulai.agent.v1.ToolResult
+	(*Interrupt)(nil),           // 19: ulai.agent.v1.Interrupt
+	(*Hangup)(nil),              // 20: ulai.agent.v1.Hangup
+	(*ServerEvent)(nil),         // 21: ulai.agent.v1.ServerEvent
+	(*SessionStarted)(nil),      // 22: ulai.agent.v1.SessionStarted
+	(*Transcript)(nil),          // 23: ulai.agent.v1.Transcript
+	(*TurnStarted)(nil),         // 24: ulai.agent.v1.TurnStarted
+	(*TurnEnded)(nil),           // 25: ulai.agent.v1.TurnEnded
+	(*TurnTokens)(nil),          // 26: ulai.agent.v1.TurnTokens
+	(*AgentStateChanged)(nil),   // 27: ulai.agent.v1.AgentStateChanged
+	(*ToolCall)(nil),            // 28: ulai.agent.v1.ToolCall
+	(*ToolOutcome)(nil),         // 29: ulai.agent.v1.ToolOutcome
+	(*UsageReport)(nil),         // 30: ulai.agent.v1.UsageReport
+	(*ModelUsage)(nil),          // 31: ulai.agent.v1.ModelUsage
+	(*UsageIO)(nil),             // 32: ulai.agent.v1.UsageIO
+	(*ModalityTokens)(nil),      // 33: ulai.agent.v1.ModalityTokens
+	(*SessionEnded)(nil),        // 34: ulai.agent.v1.SessionEnded
+	(*PipelineMetrics)(nil),     // 35: ulai.agent.v1.PipelineMetrics
+	(*PipelineDrops)(nil),       // 36: ulai.agent.v1.PipelineDrops
+	(*SessionError)(nil),        // 37: ulai.agent.v1.SessionError
+	(*CallInfo)(nil),            // 38: ulai.agent.v1.CallInfo
+	(*BackendInfo)(nil),         // 39: ulai.agent.v1.BackendInfo
+	(*AgentProfile)(nil),        // 40: ulai.agent.v1.AgentProfile
+	(*SpeechServiceConfig)(nil), // 41: ulai.agent.v1.SpeechServiceConfig
+	(*CascadeConfig)(nil),       // 42: ulai.agent.v1.CascadeConfig
+	(*ToolSpec)(nil),            // 43: ulai.agent.v1.ToolSpec
+	(*ToolParam)(nil),           // 44: ulai.agent.v1.ToolParam
+	nil,                         // 45: ulai.agent.v1.ToolSpec.ParametersEntry
 }
 var file_ulai_agent_v1_agent_proto_depIdxs = []int32{
-	3,  // 0: ulai.agent.v1.JoinRoomRequest.opening:type_name -> ulai.agent.v1.OpeningTurn
-	39, // 1: ulai.agent.v1.JoinRoomRequest.profile:type_name -> ulai.agent.v1.AgentProfile
-	37, // 2: ulai.agent.v1.Job.call:type_name -> ulai.agent.v1.CallInfo
-	13, // 3: ulai.agent.v1.ClientEvent.attach:type_name -> ulai.agent.v1.Attach
-	14, // 4: ulai.agent.v1.ClientEvent.say:type_name -> ulai.agent.v1.Say
-	15, // 5: ulai.agent.v1.ClientEvent.generate_reply:type_name -> ulai.agent.v1.GenerateReply
-	16, // 6: ulai.agent.v1.ClientEvent.inject_context:type_name -> ulai.agent.v1.InjectContext
-	17, // 7: ulai.agent.v1.ClientEvent.tool_result:type_name -> ulai.agent.v1.ToolResult
-	18, // 8: ulai.agent.v1.ClientEvent.interrupt:type_name -> ulai.agent.v1.Interrupt
-	19, // 9: ulai.agent.v1.ClientEvent.hangup:type_name -> ulai.agent.v1.Hangup
-	12, // 10: ulai.agent.v1.ClientEvent.handled_tools:type_name -> ulai.agent.v1.HandledTools
-	39, // 11: ulai.agent.v1.Attach.profile:type_name -> ulai.agent.v1.AgentProfile
-	21, // 12: ulai.agent.v1.ServerEvent.session_started:type_name -> ulai.agent.v1.SessionStarted
-	22, // 13: ulai.agent.v1.ServerEvent.transcript:type_name -> ulai.agent.v1.Transcript
-	23, // 14: ulai.agent.v1.ServerEvent.turn_started:type_name -> ulai.agent.v1.TurnStarted
-	24, // 15: ulai.agent.v1.ServerEvent.turn_ended:type_name -> ulai.agent.v1.TurnEnded
-	26, // 16: ulai.agent.v1.ServerEvent.agent_state:type_name -> ulai.agent.v1.AgentStateChanged
-	27, // 17: ulai.agent.v1.ServerEvent.tool_call:type_name -> ulai.agent.v1.ToolCall
-	29, // 18: ulai.agent.v1.ServerEvent.usage:type_name -> ulai.agent.v1.UsageReport
-	33, // 19: ulai.agent.v1.ServerEvent.session_ended:type_name -> ulai.agent.v1.SessionEnded
-	36, // 20: ulai.agent.v1.ServerEvent.error:type_name -> ulai.agent.v1.SessionError
-	28, // 21: ulai.agent.v1.ServerEvent.tool_outcome:type_name -> ulai.agent.v1.ToolOutcome
-	37, // 22: ulai.agent.v1.SessionStarted.call:type_name -> ulai.agent.v1.CallInfo
-	38, // 23: ulai.agent.v1.SessionStarted.backend:type_name -> ulai.agent.v1.BackendInfo
-	39, // 24: ulai.agent.v1.SessionStarted.profile:type_name -> ulai.agent.v1.AgentProfile
-	0,  // 25: ulai.agent.v1.Transcript.speaker:type_name -> ulai.agent.v1.Speaker
-	0,  // 26: ulai.agent.v1.TurnStarted.speaker:type_name -> ulai.agent.v1.Speaker
-	0,  // 27: ulai.agent.v1.TurnEnded.speaker:type_name -> ulai.agent.v1.Speaker
-	27, // 28: ulai.agent.v1.TurnEnded.tool_calls:type_name -> ulai.agent.v1.ToolCall
-	25, // 29: ulai.agent.v1.TurnEnded.tokens:type_name -> ulai.agent.v1.TurnTokens
-	32, // 30: ulai.agent.v1.TurnTokens.prompt:type_name -> ulai.agent.v1.ModalityTokens
-	32, // 31: ulai.agent.v1.TurnTokens.response:type_name -> ulai.agent.v1.ModalityTokens
-	1,  // 32: ulai.agent.v1.AgentStateChanged.state:type_name -> ulai.agent.v1.AgentState
-	32, // 33: ulai.agent.v1.UsageReport.prompt:type_name -> ulai.agent.v1.ModalityTokens
-	32, // 34: ulai.agent.v1.UsageReport.response:type_name -> ulai.agent.v1.ModalityTokens
-	30, // 35: ulai.agent.v1.UsageReport.models:type_name -> ulai.agent.v1.ModelUsage
-	31, // 36: ulai.agent.v1.ModelUsage.audio:type_name -> ulai.agent.v1.UsageIO
-	31, // 37: ulai.agent.v1.ModelUsage.text:type_name -> ulai.agent.v1.UsageIO
-	34, // 38: ulai.agent.v1.SessionEnded.pipeline_metrics:type_name -> ulai.agent.v1.PipelineMetrics
-	35, // 39: ulai.agent.v1.PipelineMetrics.drops:type_name -> ulai.agent.v1.PipelineDrops
-	2,  // 40: ulai.agent.v1.BackendInfo.pipeline:type_name -> ulai.agent.v1.Pipeline
-	4,  // 41: ulai.agent.v1.BackendInfo.turn_detection:type_name -> ulai.agent.v1.TurnDetection
-	42, // 42: ulai.agent.v1.AgentProfile.tools:type_name -> ulai.agent.v1.ToolSpec
-	3,  // 43: ulai.agent.v1.AgentProfile.opening:type_name -> ulai.agent.v1.OpeningTurn
-	41, // 44: ulai.agent.v1.AgentProfile.cascade:type_name -> ulai.agent.v1.CascadeConfig
-	40, // 45: ulai.agent.v1.AgentProfile.speech_service:type_name -> ulai.agent.v1.SpeechServiceConfig
-	44, // 46: ulai.agent.v1.ToolSpec.parameters:type_name -> ulai.agent.v1.ToolSpec.ParametersEntry
-	43, // 47: ulai.agent.v1.ToolSpec.ParametersEntry.value:type_name -> ulai.agent.v1.ToolParam
-	11, // 48: ulai.agent.v1.Session.Run:input_type -> ulai.agent.v1.ClientEvent
-	9,  // 49: ulai.agent.v1.Dispatch.Subscribe:input_type -> ulai.agent.v1.SubscribeRequest
-	5,  // 50: ulai.agent.v1.Room.Join:input_type -> ulai.agent.v1.JoinRoomRequest
-	7,  // 51: ulai.agent.v1.Room.Leave:input_type -> ulai.agent.v1.LeaveRequest
-	20, // 52: ulai.agent.v1.Session.Run:output_type -> ulai.agent.v1.ServerEvent
-	10, // 53: ulai.agent.v1.Dispatch.Subscribe:output_type -> ulai.agent.v1.Job
-	6,  // 54: ulai.agent.v1.Room.Join:output_type -> ulai.agent.v1.JoinRoomResponse
-	8,  // 55: ulai.agent.v1.Room.Leave:output_type -> ulai.agent.v1.LeaveResponse
-	52, // [52:56] is the sub-list for method output_type
-	48, // [48:52] is the sub-list for method input_type
-	48, // [48:48] is the sub-list for extension type_name
-	48, // [48:48] is the sub-list for extension extendee
-	0,  // [0:48] is the sub-list for field type_name
+	4,  // 0: ulai.agent.v1.JoinRoomRequest.opening:type_name -> ulai.agent.v1.OpeningTurn
+	40, // 1: ulai.agent.v1.JoinRoomRequest.profile:type_name -> ulai.agent.v1.AgentProfile
+	3,  // 2: ulai.agent.v1.JoinRoomRequest.transport:type_name -> ulai.agent.v1.MediaTransport
+	38, // 3: ulai.agent.v1.Job.call:type_name -> ulai.agent.v1.CallInfo
+	14, // 4: ulai.agent.v1.ClientEvent.attach:type_name -> ulai.agent.v1.Attach
+	15, // 5: ulai.agent.v1.ClientEvent.say:type_name -> ulai.agent.v1.Say
+	16, // 6: ulai.agent.v1.ClientEvent.generate_reply:type_name -> ulai.agent.v1.GenerateReply
+	17, // 7: ulai.agent.v1.ClientEvent.inject_context:type_name -> ulai.agent.v1.InjectContext
+	18, // 8: ulai.agent.v1.ClientEvent.tool_result:type_name -> ulai.agent.v1.ToolResult
+	19, // 9: ulai.agent.v1.ClientEvent.interrupt:type_name -> ulai.agent.v1.Interrupt
+	20, // 10: ulai.agent.v1.ClientEvent.hangup:type_name -> ulai.agent.v1.Hangup
+	13, // 11: ulai.agent.v1.ClientEvent.handled_tools:type_name -> ulai.agent.v1.HandledTools
+	40, // 12: ulai.agent.v1.Attach.profile:type_name -> ulai.agent.v1.AgentProfile
+	22, // 13: ulai.agent.v1.ServerEvent.session_started:type_name -> ulai.agent.v1.SessionStarted
+	23, // 14: ulai.agent.v1.ServerEvent.transcript:type_name -> ulai.agent.v1.Transcript
+	24, // 15: ulai.agent.v1.ServerEvent.turn_started:type_name -> ulai.agent.v1.TurnStarted
+	25, // 16: ulai.agent.v1.ServerEvent.turn_ended:type_name -> ulai.agent.v1.TurnEnded
+	27, // 17: ulai.agent.v1.ServerEvent.agent_state:type_name -> ulai.agent.v1.AgentStateChanged
+	28, // 18: ulai.agent.v1.ServerEvent.tool_call:type_name -> ulai.agent.v1.ToolCall
+	30, // 19: ulai.agent.v1.ServerEvent.usage:type_name -> ulai.agent.v1.UsageReport
+	34, // 20: ulai.agent.v1.ServerEvent.session_ended:type_name -> ulai.agent.v1.SessionEnded
+	37, // 21: ulai.agent.v1.ServerEvent.error:type_name -> ulai.agent.v1.SessionError
+	29, // 22: ulai.agent.v1.ServerEvent.tool_outcome:type_name -> ulai.agent.v1.ToolOutcome
+	38, // 23: ulai.agent.v1.SessionStarted.call:type_name -> ulai.agent.v1.CallInfo
+	39, // 24: ulai.agent.v1.SessionStarted.backend:type_name -> ulai.agent.v1.BackendInfo
+	40, // 25: ulai.agent.v1.SessionStarted.profile:type_name -> ulai.agent.v1.AgentProfile
+	0,  // 26: ulai.agent.v1.Transcript.speaker:type_name -> ulai.agent.v1.Speaker
+	0,  // 27: ulai.agent.v1.TurnStarted.speaker:type_name -> ulai.agent.v1.Speaker
+	0,  // 28: ulai.agent.v1.TurnEnded.speaker:type_name -> ulai.agent.v1.Speaker
+	28, // 29: ulai.agent.v1.TurnEnded.tool_calls:type_name -> ulai.agent.v1.ToolCall
+	26, // 30: ulai.agent.v1.TurnEnded.tokens:type_name -> ulai.agent.v1.TurnTokens
+	33, // 31: ulai.agent.v1.TurnTokens.prompt:type_name -> ulai.agent.v1.ModalityTokens
+	33, // 32: ulai.agent.v1.TurnTokens.response:type_name -> ulai.agent.v1.ModalityTokens
+	1,  // 33: ulai.agent.v1.AgentStateChanged.state:type_name -> ulai.agent.v1.AgentState
+	33, // 34: ulai.agent.v1.UsageReport.prompt:type_name -> ulai.agent.v1.ModalityTokens
+	33, // 35: ulai.agent.v1.UsageReport.response:type_name -> ulai.agent.v1.ModalityTokens
+	31, // 36: ulai.agent.v1.UsageReport.models:type_name -> ulai.agent.v1.ModelUsage
+	32, // 37: ulai.agent.v1.ModelUsage.audio:type_name -> ulai.agent.v1.UsageIO
+	32, // 38: ulai.agent.v1.ModelUsage.text:type_name -> ulai.agent.v1.UsageIO
+	35, // 39: ulai.agent.v1.SessionEnded.pipeline_metrics:type_name -> ulai.agent.v1.PipelineMetrics
+	36, // 40: ulai.agent.v1.PipelineMetrics.drops:type_name -> ulai.agent.v1.PipelineDrops
+	2,  // 41: ulai.agent.v1.BackendInfo.pipeline:type_name -> ulai.agent.v1.Pipeline
+	5,  // 42: ulai.agent.v1.BackendInfo.turn_detection:type_name -> ulai.agent.v1.TurnDetection
+	43, // 43: ulai.agent.v1.AgentProfile.tools:type_name -> ulai.agent.v1.ToolSpec
+	4,  // 44: ulai.agent.v1.AgentProfile.opening:type_name -> ulai.agent.v1.OpeningTurn
+	42, // 45: ulai.agent.v1.AgentProfile.cascade:type_name -> ulai.agent.v1.CascadeConfig
+	41, // 46: ulai.agent.v1.AgentProfile.speech_service:type_name -> ulai.agent.v1.SpeechServiceConfig
+	45, // 47: ulai.agent.v1.ToolSpec.parameters:type_name -> ulai.agent.v1.ToolSpec.ParametersEntry
+	44, // 48: ulai.agent.v1.ToolSpec.ParametersEntry.value:type_name -> ulai.agent.v1.ToolParam
+	12, // 49: ulai.agent.v1.Session.Run:input_type -> ulai.agent.v1.ClientEvent
+	10, // 50: ulai.agent.v1.Dispatch.Subscribe:input_type -> ulai.agent.v1.SubscribeRequest
+	6,  // 51: ulai.agent.v1.Room.Join:input_type -> ulai.agent.v1.JoinRoomRequest
+	8,  // 52: ulai.agent.v1.Room.Leave:input_type -> ulai.agent.v1.LeaveRequest
+	21, // 53: ulai.agent.v1.Session.Run:output_type -> ulai.agent.v1.ServerEvent
+	11, // 54: ulai.agent.v1.Dispatch.Subscribe:output_type -> ulai.agent.v1.Job
+	7,  // 55: ulai.agent.v1.Room.Join:output_type -> ulai.agent.v1.JoinRoomResponse
+	9,  // 56: ulai.agent.v1.Room.Leave:output_type -> ulai.agent.v1.LeaveResponse
+	53, // [53:57] is the sub-list for method output_type
+	49, // [49:53] is the sub-list for method input_type
+	49, // [49:49] is the sub-list for extension type_name
+	49, // [49:49] is the sub-list for extension extendee
+	0,  // [0:49] is the sub-list for field type_name
 }
 
 func init() { file_ulai_agent_v1_agent_proto_init() }
@@ -4178,7 +4243,7 @@ func file_ulai_agent_v1_agent_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_ulai_agent_v1_agent_proto_rawDesc), len(file_ulai_agent_v1_agent_proto_rawDesc)),
-			NumEnums:      5,
+			NumEnums:      6,
 			NumMessages:   40,
 			NumExtensions: 0,
 			NumServices:   3,

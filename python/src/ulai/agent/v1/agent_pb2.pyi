@@ -27,6 +27,12 @@ class Pipeline(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     PIPELINE_SEMI_CASCADE: _ClassVar[Pipeline]
     PIPELINE_CASCADE: _ClassVar[Pipeline]
 
+class MediaTransport(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    MEDIA_TRANSPORT_UNSPECIFIED: _ClassVar[MediaTransport]
+    MEDIA_TRANSPORT_WEBSOCKET: _ClassVar[MediaTransport]
+    MEDIA_TRANSPORT_WEBRTC: _ClassVar[MediaTransport]
+
 class OpeningTurn(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
     OPENING_TURN_UNSPECIFIED: _ClassVar[OpeningTurn]
@@ -49,6 +55,9 @@ PIPELINE_UNSPECIFIED: Pipeline
 PIPELINE_REALTIME: Pipeline
 PIPELINE_SEMI_CASCADE: Pipeline
 PIPELINE_CASCADE: Pipeline
+MEDIA_TRANSPORT_UNSPECIFIED: MediaTransport
+MEDIA_TRANSPORT_WEBSOCKET: MediaTransport
+MEDIA_TRANSPORT_WEBRTC: MediaTransport
 OPENING_TURN_UNSPECIFIED: OpeningTurn
 OPENING_TURN_AGENT: OpeningTurn
 OPENING_TURN_CALLER: OpeningTurn
@@ -57,7 +66,7 @@ TURN_DETECTION_SERVER: TurnDetection
 TURN_DETECTION_CLIENT: TurnDetection
 
 class JoinRoomRequest(_message.Message):
-    __slots__ = ("agent_id", "room_id", "participant_id", "custom_fields_json", "opening", "room_url", "room_token", "profile")
+    __slots__ = ("agent_id", "room_id", "participant_id", "custom_fields_json", "opening", "room_url", "room_token", "profile", "transport")
     AGENT_ID_FIELD_NUMBER: _ClassVar[int]
     ROOM_ID_FIELD_NUMBER: _ClassVar[int]
     PARTICIPANT_ID_FIELD_NUMBER: _ClassVar[int]
@@ -66,6 +75,7 @@ class JoinRoomRequest(_message.Message):
     ROOM_URL_FIELD_NUMBER: _ClassVar[int]
     ROOM_TOKEN_FIELD_NUMBER: _ClassVar[int]
     PROFILE_FIELD_NUMBER: _ClassVar[int]
+    TRANSPORT_FIELD_NUMBER: _ClassVar[int]
     agent_id: str
     room_id: str
     participant_id: str
@@ -74,7 +84,8 @@ class JoinRoomRequest(_message.Message):
     room_url: str
     room_token: str
     profile: AgentProfile
-    def __init__(self, agent_id: _Optional[str] = ..., room_id: _Optional[str] = ..., participant_id: _Optional[str] = ..., custom_fields_json: _Optional[str] = ..., opening: _Optional[_Union[OpeningTurn, str]] = ..., room_url: _Optional[str] = ..., room_token: _Optional[str] = ..., profile: _Optional[_Union[AgentProfile, _Mapping]] = ...) -> None: ...
+    transport: MediaTransport
+    def __init__(self, agent_id: _Optional[str] = ..., room_id: _Optional[str] = ..., participant_id: _Optional[str] = ..., custom_fields_json: _Optional[str] = ..., opening: _Optional[_Union[OpeningTurn, str]] = ..., room_url: _Optional[str] = ..., room_token: _Optional[str] = ..., profile: _Optional[_Union[AgentProfile, _Mapping]] = ..., transport: _Optional[_Union[MediaTransport, str]] = ...) -> None: ...
 
 class JoinRoomResponse(_message.Message):
     __slots__ = ("room_id", "agent_id", "participant_id", "connection_id", "node_address")
